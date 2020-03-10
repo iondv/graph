@@ -1,0 +1,23 @@
+{
+  "name": "graph",
+  "version": "0.0.1",
+  "authors": [
+    "Vasiliy Ermilov <ermilov.work@yandex.ru>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "d3": "^4.7.1"
+  }
+}

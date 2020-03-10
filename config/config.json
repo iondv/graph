@@ -1,0 +1,14 @@
+{
+  "parametrised": true,
+  "sysTitle": "Графы ION",
+  "di" : {
+    "graphMeta": {
+      "module": "./lib/impl/DsGraphMetaRepository",
+      "initMethod": "init",
+      "initLevel": 1,
+      "options": {
+        "dataSource": "ion://Db"
+      }
+    }
+  }
+}

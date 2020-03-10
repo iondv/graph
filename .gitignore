@@ -1,0 +1,11 @@
+/node_modules/*
+/view/default/vendor/*
+/view/default/static/vendor/*
+/view/default/static/css/*.less.css
+/view/default/static/css/*.min.css
+/view/default/static/js/*.min.js
+/config/navigation.json
+/.directory
+/**/*.ini
+/**/*.swp
+package-lock.json

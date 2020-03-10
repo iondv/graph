@@ -1,0 +1,84 @@
+circle.start-circle {
+  fill: #aaa;
+}
+
+.nodes rect,
+.labels .label,
+.path.link ,
+text.link-label {
+  cursor: pointer;
+}
+
+.nodes rect.state {
+  fill: #048a25;
+}
+
+.nodes rect.state.selected {
+  stroke: darkgreen;
+  stroke-width: 3px;
+}
+
+.nodes rect.start-state {
+  fill: #496686;
+}
+
+.nodes rect.start-state.selected {
+  stroke: darkblue;
+  stroke-width: 3px;
+}
+
+.nodes rect.finish-state {
+  fill: #c40000;
+}
+
+.nodes rect.finish-state.selected {
+  stroke: darkred;
+  stroke-width: 3px;
+}
+
+.nodes rect.extra-state {
+  fill: lightseagreen;
+}
+
+.nodes rect.extra-state.selected {
+  stroke: #113d38;
+  stroke-width: 3px;
+}
+
+.labels .label {
+  text-transform: uppercase;
+  fill: #ffffff;
+}
+
+defs marker {
+  fill: #aaa;
+}
+
+path.link {
+  fill: transparent;
+}
+
+.link-labels .link-label {
+  fill: #aaa;
+}
+
+.link-labels .link-label.selected {
+  fill: black;
+}
+
+div.tooltip {
+  background-color: #ffffff;
+  opacity: 0.7;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.tooltip .caption {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.tooltip .header {
+  font-style: italic;
+  text-decoration: underline;
+}

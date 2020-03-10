@@ -1,0 +1,17 @@
+<html>
+<head>
+  <title><%=sysTitle%></title>
+  <base id="baseUrl" href="<%=baseUrl%>">
+</head>
+<body>
+<ul class="nav nav-list">
+  <% for (let item of leftMenu) { %>
+  <li>
+    <a href="<%= item.url %>">
+      <i class="main-icon fa fa-institution"></i>
+      <span><%=item.caption%></span></a>
+  </li>
+  <% } %>
+</ul>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+<head>
+  <title><%=title%></title>
+  <base id="baseUrl" href="<%=baseUrl%>">
+  <link href="<%= module %>/css/graph.css" rel="stylesheet">
+</head>
+<body>
+  <div id="graph"></div>
+  <script>
+    var treeData;
+    try {
+      treeData = <%-JSON.stringify(data)%>;
+    } catch (e) {
+      treeData = {};
+      console.log(e);
+    }
+  </script>
+  <script src="<%= module %>/vendor/d3/d3.min.js"></script>
+  <script src="<%= module %>/js/graph.js"></script>
+</body>
+</html>
