@@ -1,4 +1,5 @@
 module.exports = Object.assign(
   {},
-  require('./backend')
+  require('./backend'),
+  require('./lib')
 );
