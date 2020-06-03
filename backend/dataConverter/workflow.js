@@ -1,7 +1,8 @@
 /**
  * Created by Vasiliy Ermilov (ermilov.work@yandex.ru) on 3/14/17.
  */
-'use strict';
+const IonError = require('core/IonError');
+const Errors = require('../../errors/backend');
 
 /**
  *
@@ -10,12 +11,12 @@
  */
 module.exports = function (graphMeta, metaRepo) {
   if (!metaRepo || !graphMeta) {
-    return Promise.reject(new Error('Не переданы необходимые компоненты'));
+    return Promise.reject(new IonError(Errors.NO_DEPS));
   }
 
   let wf = metaRepo.getWorkflow(graphMeta.wfClass, graphMeta.wfName, graphMeta.namespace);
   if (!wf) {
-    return Promise.reject(new Error('Не найден бизнес-процесс ' + graphMeta.wfName));
+    return Promise.reject(new IonError(Errors.NO_WF, {wf: graphMeta.wfName}));
   }
 
   let nodes = [];

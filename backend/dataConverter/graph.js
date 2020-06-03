@@ -6,6 +6,8 @@ const PropertyTypes = require('core/PropertyTypes');
 const normalize = require('core/util/normalize');
 const F = require('core/FunctionCodes');
 const {renderTemplate} = require('../util');
+const IonError = require('core/IonError');
+const Errors = require('../../errors/backend');
 
 // jshint maxparams: 10
 function pushToSrc(className, id, value, src) {
@@ -40,7 +42,7 @@ function loadItem(item, className, relations, src, links, namespace, metaRepo, d
   return new Promise(function (resolve, reject) {
     let cm = metaRepo.getMeta(className, null, namespace);
     if (!cm) {
-      reject(new Error('Не найден класс ' + className));
+      reject(new IonError(Errors.NO_CLASS, {class: className}));
     }
     let promises = [];
     if (!srcContains(className, item.getItemId(), src)) {
@@ -144,7 +146,7 @@ function loadItem(item, className, relations, src, links, namespace, metaRepo, d
  */
 module.exports = function (res, graphMeta, query, metaRepo, dataRepo) {
   if (!metaRepo || !dataRepo || !graphMeta) {
-    return Promise.reject(new Error('Не переданы необходимые компоненты.'));
+    return Promise.reject(new IonError(Errors.NO_DEPS));
   }
 
   let root = query.root;
@@ -158,7 +160,7 @@ module.exports = function (res, graphMeta, query, metaRepo, dataRepo) {
     let rootId = rootParts[1];
     let cm = metaRepo.getMeta(rootClass, null, graphMeta.namespace);
     if (!cm) {
-      return Promise.reject(new Error('Не найден класс ' + rootClass));
+      return Promise.reject(new IonError(Errors.NO_CLASS, {class: rootClass}));
     }
     let renderPromises = [];
     let loader = rootId ? dataRepo.getItem(cm.getCanonicalName(), rootId) : dataRepo.getList(cm.getCanonicalName());

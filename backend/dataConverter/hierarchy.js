@@ -5,6 +5,8 @@
 const cast = require('core/cast');
 const {renderTemplate} = require('../util');
 const F = require('core/FunctionCodes');
+const IonError = require('core/IonError');
+const Errors = require('../../errors/backend');
 
 // jshint maxstatements: 30, maxcomplexity: 20
 
@@ -122,7 +124,7 @@ function forEachNode(hierarchy, cb) {
  */
 module.exports = function (res, graphMeta, query, metaRepo, dataRepo) {
   if (!metaRepo || !dataRepo || !graphMeta) {
-    return Promise.reject(new Error('Не переданы необходимые компоненты'));
+    return Promise.reject(new IonError(Errors.NO_DEPS));
   }
 
   let rootId = null;
@@ -134,12 +136,12 @@ module.exports = function (res, graphMeta, query, metaRepo, dataRepo) {
   }
 
   if (!className) {
-    return Promise.reject(new Error('Не передан начальный класс иерархии'));
+    return Promise.reject(new IonError(Errors.NO_ROOT_CLASS));
   }
 
   let cm = metaRepo.getMeta(className, null, graphMeta.namespace);
   if (!cm) {
-    return Promise.reject(new Error('Не найден класс ' + className));
+    return Promise.reject(new IonError(Errors.NO_CLASS, {class: className}));
   }
 
   let relations = graphMeta.relations;
@@ -163,7 +165,7 @@ module.exports = function (res, graphMeta, query, metaRepo, dataRepo) {
     rootsGetter = dataRepo.getItem(cm.getCanonicalName(), rootId)
       .then(rootItem => {
         if (!rootItem) {
-          throw new Error('не найден объект');
+          throw new IonError(Errors.NO_ITEM);
         }
         hierarchy.item = rootItem;
         return findChildren([hierarchy], [relations], cm.getNamespace(), metaRepo, dataRepo);

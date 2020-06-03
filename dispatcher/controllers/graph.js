@@ -8,6 +8,7 @@ const di = require('core/di');
 const GraphTypes = require('../../lib/GraphTypes');
 const dataConverter = require('../../backend/dataConverter');
 const menu = require('../../backend/menu');
+const __ = require('core/strings').unprefix('errors');
 
 module.exports = function (req, res) {
   /**
@@ -15,7 +16,7 @@ module.exports = function (req, res) {
    */
   let scope = di.context(moduleName);
   if (!scope.graphMeta || !scope.metaRepo || !scope.dataRepo) {
-    scope.sysLog.error('Не настроены компоненты модуля графов.');
+    scope.sysLog.error(__('Не настроены компоненты модуля графов.'));
     return res.sendStatus(500);
   }
   let meta = scope.graphMeta.getMeta(req.params.code);
