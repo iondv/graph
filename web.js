@@ -14,13 +14,6 @@ const ejsLocals = require('ejs-locals');
 const theme = require('lib/util/theme');
 const staticRouter = require('lib/util/staticRouter');
 const extViews = require('lib/util/extViews');
-const errorSetup = require('core/error-setup');
-const i18nSetup = require('core/i18n-setup');
-
-const lang = config.lang || rootConfig.lang || 'ru';
-const i18nDir = path.join(__dirname, 'i18n');
-errorSetup(lang, i18nDir);
-i18nSetup(lang, config.i18n || i18nDir, moduleName);
 
 var app = module.exports = express();
 var router = express.Router();
@@ -43,10 +36,15 @@ app._init = function () {
     [],
     'modules/' + moduleName
   ).then(function (scope) {
+    // i18n
+    const lang = config.lang || rootConfig.lang || 'ru';
+    const i18nDir = path.join(__dirname, 'i18n');
+    scope.translate.setup(lang, config.i18n || i18nDir, moduleName);
     let themePath = scope.settings.get(moduleName + '.theme') || config.theme || 'default';
     themePath = theme.resolve(__dirname, themePath);
     const themeI18n = path.join(themePath, 'i18n');
-    i18nSetup(lang, themeI18n, moduleName, scope.sysLog);
+    scope.translate.setup(lang, themeI18n, moduleName);
+    //
     theme(
       app,
       moduleName,
