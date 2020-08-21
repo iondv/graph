@@ -4,7 +4,7 @@
   "description": "",
   "engines": {
     "node": "1.0.0",
-    "ion": "2.8.0"
+    "ion": "4.0.0"
   },
- "license": "Apache License 2.0",
+ "license": "Apache License 2.0"
 }
