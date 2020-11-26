@@ -3,11 +3,12 @@
 const moduleName = require('../module-name');
 const di = require('core/di');
 const GraphTypes = require('../lib/GraphTypes');
+const __ = require('core/strings').unprefix('i18n');
 
 exports.getLeft = function () {
   const scope = di.context(moduleName);
   if (!scope.graphMeta) {
-    scope.sysLog.error('Не настроены компоненты модуля графов.');
+    scope.sysLog.error(__('Не настроены компоненты модуля графов.'));
     return [];
   }
   let items = [];
